@@ -9,20 +9,38 @@ local notes <const> = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G"
 function Block:init()	
 	self.synth = snd.synth.new()
 	self.synth:setWaveform(0)
-	self.attack = 0.05
-	self.sustain = 0.1
-	self.decay = 0.0
+	self.attack = 0.1
+	self.sustain = 0.0
+	self.decay = 0.2
 	self.release = 0.5
-
+	self:setADSR()
 	self.note = "A"
 	self.octave = 3
+end
+
+function Block:paste(them)
+	them.synth = self.synth
+	them.attack = self.attack
+	them.decay = self.decay
+	them.sustain = self.sustain
+	them.release = self.release
+	them.note = self.note
+	them.octave = self.octave
+	them.active = true
+	return them
+end
+
+function Block:copy()
+	local them = Block()
+	self:paste(them)
+	return them
 end
 
 function Block:incAttack()
 end
 
 function Block:setADSR()
-	self.synth:setADSR(self.attack, self.sustain, self.decay, self.release)
+	self.synth:setADSR(self.attack, self.decay, self.sustain, self.release)
 end
 
 function Block:activate()
