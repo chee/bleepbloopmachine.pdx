@@ -10,16 +10,20 @@ function Block:init()
 	self.synth = snd.synth.new()
 	self.synth:setWaveform(0)
 	self.attack = 0.1
-	self.sustain = 0.0
-	self.decay = 0.2
 	self.release = 0.5
-	self:setADSR()
+	self:updateEnvelope()
 	self.note = "A"
 	self.octave = 3
 end
 
 function Block:paste(them)
-	them.synth = self.synth
+	--[[ TODO the page should actually share the synth!
+	 	Synths are poly, so there is no need for each block to own one
+		Except for drum, which should maybe just be its own thing
+		With the same interface for the update loop ]]
+	--[[ NEVERMIND actually nope i'm wrong. because the synths have
+		a single amp envelope and i want each block to have its own ]]
+	them.synth = self.synth:copy()
 	them.attack = self.attack
 	them.decay = self.decay
 	them.sustain = self.sustain
@@ -27,7 +31,6 @@ function Block:paste(them)
 	them.note = self.note
 	them.octave = self.octave
 	them.active = true
-	return them
 end
 
 function Block:copy()
@@ -39,8 +42,22 @@ end
 function Block:incAttack()
 end
 
-function Block:setADSR()
-	self.synth:setADSR(self.attack, self.decay, self.sustain, self.release)
+-- we're just doing AR
+function Block:updateEnvelope()
+	if self.attack < 0 then
+		self.attack = 0.001
+	end
+	if self.release < 0 then
+		self.release = 0.001
+	end
+
+	if self.attack > 2 then
+		self.attack = 2
+	end
+	if self.release > 2 then
+		self.release = 2
+	end
+	self.synth:setADSR(self.attack, self.release, 0, self.release)
 end
 
 function Block:activate()

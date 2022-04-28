@@ -111,9 +111,25 @@ local clipboard = Block()
 blockWidth = 32
 space = 8
 
--- HMM maybe we update a variable selectedBlock in the loop and callbacks (rename selected_block to selectedBlockIndex)
+--[[
+    HMM maybe we update a variable selectedBlock 
+    in the loop and callbacks
+    (rename selected_block to selectedBlockIndex)
+]]
 function getSelectedBlock()
     return pages[selected_page][selected_block]
+end
+
+function playdate.cranked(change, accel)
+    if playdate.buttonIsPressed("a") and playdate.buttonIsPressed("b") then
+    elseif playdate.buttonIsPressed("b") then
+        getSelectedBlock().attack += (accel / 100)
+        getSelectedBlock():updateEnvelope()
+    elseif playdate.buttonIsPressed("a") then
+        getSelectedBlock().release -= (accel / 100)
+        getSelectedBlock():updateEnvelope()
+    else
+    end
 end
 
 function playdate.upButtonDown()
@@ -174,7 +190,7 @@ function playdate.rightButtonDown()
         getSelectedBlock():incNote()
     elseif playdate.buttonIsPressed("b") then
         clipboard:paste(getSelectedBlock())
-        getSelectedBlock().synth:setWaveform(selected_page)
+        getSelectedBlock().synth:setWaveform(selected_page)         
     else
         selected_block = selected_block + 1
     end
