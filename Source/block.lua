@@ -1,12 +1,13 @@
+import "CoreLibs/object"
 class('Block').extends(Object)
 
 Block.BLOCK_TYPE_NOTE = 0
 
 local snd <const> = playdate.sound
 
-local notes <const> = {"A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#"}
+local notes <const> = { "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#" }
 
-function Block:init()	
+function Block:init()
 	self.synth = snd.synth.new()
 	self.synth:setWaveform(0)
 	self.attack = 0.1
@@ -79,7 +80,7 @@ function Block:incNote()
 end
 
 function Block:decNote()
-		local currentIndex = table.indexOfElement(notes, self.note)
+	local currentIndex = table.indexOfElement(notes, self.note)
 	if self.note == "A" then
 		self:decOctave()
 		self.note = "G#"
@@ -101,7 +102,7 @@ function Block:decOctave()
 end
 
 function Block:notestring()
-	return self.note..tostring(self.octave)
+	return self.note .. tostring(self.octave)
 end
 
 function Block:play()

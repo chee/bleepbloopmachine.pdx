@@ -4,15 +4,8 @@ import "CoreLibs/sprites"
 import "CoreLibs/timer"
 import "block"
 
-local ceil = math.ceil
 local gfx <const> = playdate.graphics
-local snd <const> = playdate.sound
 gfx.setColor(gfx.kColorBlack)
-
-local UP <const> = 0
-local DOWN <const> = 1
-local LEFT <const> = 2
-local RIGHT <const> = 3
 
 local pages = {{
     Block(),
