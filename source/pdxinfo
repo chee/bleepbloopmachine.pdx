@@ -1,0 +1,7 @@
+name=Bleepbloopmachine
+author=chee
+description=A bleeping, blooping machine
+bundleID=party.chee.playdate.bleepbloopmachine
+version=0.1
+buildNumber=101
+imagePath=SystemAssets

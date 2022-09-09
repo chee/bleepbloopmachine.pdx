@@ -78,6 +78,78 @@ local pages = {{
     Block(),
     Block(),
     Block(),
+},
+{
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+},
+{
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+},
+{
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+},
+{
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
+    Block(),
 }}
 
 for page_index, blocks in ipairs(pages) do
@@ -105,7 +177,7 @@ blockWidth = 32
 space = 8
 
 --[[
-    HMM maybe we update a variable selectedBlock 
+    HMM maybe we update a variable selectedBlock
     in the loop and callbacks
     (rename selected_block to selectedBlockIndex)
 ]]
@@ -175,7 +247,7 @@ end
 
 function playdate.rightButtonDown()
     if playdate.buttonIsPressed("a") and playdate.buttonIsPressed("b") then
-        if selected_page < 4 then
+        if selected_page < 8 then
             selected_page += 1
         end
     elseif playdate.buttonIsPressed("a") then
@@ -183,14 +255,14 @@ function playdate.rightButtonDown()
         getSelectedBlock():incNote()
     elseif playdate.buttonIsPressed("b") then
         clipboard:paste(getSelectedBlock())
-        getSelectedBlock().synth:setWaveform(selected_page)         
+        getSelectedBlock().synth:setWaveform(selected_page)
     else
         selected_block = selected_block + 1
     end
     if selected_block > 16 then
         selected_block = 16
     end
-end 
+end
 
 -- this is called every frame
 function playdate.update()

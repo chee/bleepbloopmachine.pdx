@@ -10,8 +10,8 @@ local notes <const> = { "A", "A#", "B", "C", "C#", "D", "D#", "E", "F", "F#", "G
 function Block:init()
 	self.synth = snd.synth.new()
 	self.synth:setWaveform(0)
-	self.attack = 0.1
-	self.release = 0.5
+	self.attack = 0.001
+	self.release = 0.05
 	self:updateEnvelope()
 	self.note = "A"
 	self.octave = 3
