@@ -1,7 +1,8 @@
-name=Bleepbloopmachine
+name=bleepbloopmachine
 author=chee
 description=A bleeping, blooping machine
 bundleID=party.chee.playdate.bleepbloopmachine
 version=0.1
-buildNumber=101
-imagePath=SystemAssets
+buildNumber=103
+imagePath=system
+launchSoundPath=system/yesterdays-people.wav

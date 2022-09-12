@@ -8,7 +8,6 @@ SDKBIN=$(SDK)/bin
 GAME=$(notdir $(CURDIR))
 SIM=Playdate Simulator
 
-
 build: clean compile run
 
 run: open
@@ -16,8 +15,8 @@ run: open
 clean:
 	rm -rf '$(GAME).pdx'
 
-compile: Source/main.lua
-	"$(SDKBIN)/pdc" 'Source' '$(GAME).pdx'
+compile: source/main.lua
+	"$(SDKBIN)/pdc" 'source' '$(GAME).pdx'
 	
 open:
 	open -a '$(SDKBIN)/$(SIM).app/Contents/MacOS/$(SIM)' '$(GAME).pdx'
